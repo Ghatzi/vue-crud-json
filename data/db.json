@@ -2,18 +2,18 @@
   "users": [
     {
       "id": 1,
-      "username": "jondoe222",
-      "password": "!12345",
+      "username": "jondoe123",
+      "password": "12345",
       "firstName": "jon",
-      "lastName": "doe333",
+      "lastName": "doe",
       "isAdmin": true,
       "createdDate": "10/05/2023, 23:04:52",
-      "updatedDate": "10/05/2023, 23:55:14"
+      "updatedDate": "11/05/2023, 16:36:04"
     },
     {
       "id": 2,
-      "username": "janedoe987",
-      "password": "!12345",
+      "username": "janedoe123",
+      "password": "12345",
       "firstName": "jane",
       "lastName": "doe",
       "isAdmin": false,
@@ -22,30 +22,30 @@
     },
     {
       "id": 3,
-      "username": "hgjhjhjh",
-      "password": "jjjjjjjj",
-      "firstName": "ggdg",
-      "lastName": "rerer",
+      "username": "georgehatzi123",
+      "password": "12345",
+      "firstName": "george",
+      "lastName": "hatzi",
       "isAdmin": false,
       "createdDate": "10/05/2023, 23:04:52",
       "updatedDate": "10/05/2023, 23:04:52"
     },
     {
       "id": 4,
-      "username": "aaa",
-      "password": "ssssss",
-      "firstName": "ffff",
-      "lastName": "ggggjjj",
-      "isAdmin": false,
+      "username": "bobbielava",
+      "password": "12345",
+      "firstName": "bobbie",
+      "lastName": "lava",
+      "isAdmin": true,
       "createdDate": "10/05/2023, 23:04:52",
-      "updatedDate": "11/05/2023, 00:01:56"
+      "updatedDate": "11/05/2023, 15:20:39"
     },
     {
       "id": 5,
-      "username": "jjj",
-      "password": "kkk",
-      "firstName": "lll",
-      "lastName": "llll",
+      "username": "ikaroshatzi",
+      "password": "12345",
+      "firstName": "ikaros",
+      "lastName": "hatzi",
       "isAdmin": false,
       "createdDate": "10/05/2023, 23:04:52",
       "updatedDate": "11/05/2023, 13:25:38"

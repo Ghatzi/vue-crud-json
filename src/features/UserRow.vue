@@ -32,7 +32,13 @@ const router = useRouter();
 </template>
 
 <style lang="postcss" scoped>
-table td {
-  padding: 1em 0;
+table {
+  td {
+    @apply py-4;
+  }
+
+  td:not(:first-child) {
+    @apply capitalize;
+  }
 }
 </style>

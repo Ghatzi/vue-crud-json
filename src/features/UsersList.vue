@@ -56,14 +56,16 @@ const handleDelete = async (id: number) => {
         <th>Delete</th>
       </tr>
     </thead>
-    <tbody class="text-center capitalize">
+    <tbody class="text-center">
       <UserRow :users="users" @handle-delete="handleDelete"></UserRow>
     </tbody>
   </table>
 </template>
 
 <style scoped lang="postcss">
-table th {
-  padding: 1em 0;
+table {
+  th {
+    @apply py-4;
+  }
 }
 </style>

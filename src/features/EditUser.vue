@@ -14,6 +14,7 @@ const username = ref<string>('');
 const password = ref<string>('');
 const lastName = ref<string>('');
 const isAdmin = ref<string>('');
+const originalUsername = ref<string>('');
 const isDisabled = ref<boolean>(true);
 
 const getUserById = async () => {
@@ -24,6 +25,7 @@ const getUserById = async () => {
     password.value = data.password;
     lastName.value = data.lastName;
     isAdmin.value = data.isAdmin;
+    originalUsername.value = data.username;
   } catch (err) {
     console.log(err);
   }
@@ -55,9 +57,9 @@ const handleSubmit = async () => {
 
 const checkIsValidated = () => {
   if (
-    username.value === '' ||
-    password.value === '' ||
-    lastName.value === '' ||
+    !username.value ||
+    !password.value ||
+    !lastName.value ||
     Boolean(isAdmin.value) !== Boolean(isAdmin.value)
   ) {
     isDisabled.value = true;
@@ -69,7 +71,7 @@ const checkIsValidated = () => {
 
 <template>
   <div class="wrapper">
-    <h2>Edit {{ username }}</h2>
+    <h2>Edit {{ originalUsername }}</h2>
 
     <form @submit.prevent="handleSubmit">
       <label htmlFor="username">Username: </label>
@@ -104,12 +106,12 @@ const checkIsValidated = () => {
 
       <div class="flex justify-end mt-2">
         <button
-          title="Update"
+          title="Update User"
           class="btn"
           :class="isDisabled ? 'btn-gray' : 'btn-blue'"
           :disabled="isDisabled"
         >
-          Update
+          Update User
         </button>
       </div>
     </form>
