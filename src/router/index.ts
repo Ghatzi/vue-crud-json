@@ -21,9 +21,9 @@ export const routes: Array<RouteRecordRaw> = [
         component: () => import('../features/EditUser.vue')
       },
       {
-        path: '/users/add',
-        name: 'AddUser',
-        component: () => import('../features/AddUser.vue')
+        path: '/users/create',
+        name: 'CreateUser',
+        component: () => import('../features/CreateUser.vue')
       }
     ]
   }

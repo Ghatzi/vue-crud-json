@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useUsers } from '../store/useUsers';
+import { useRouter } from 'vue-router';
 
 onMounted(() => {
   store.fetchUsers();
 });
 
+const router = useRouter();
 const store = useUsers();
 
 const username = ref<string>('');
@@ -14,15 +16,15 @@ const firstName = ref<string>('');
 const lastName = ref<string>('');
 const isDisabled = ref<boolean>(true);
 
-const getNewId = computed(() => {
-  return store.getUsersLength + 1;
+const getNextId = computed(() => {
+  return store.getNextId;
 });
 
-const handleSubmit = async () => {
+const handleSubmit = () => {
   const date = new Date().toLocaleString();
 
-  const createUser = {
-    id: getNewId.value,
+  const addUser = {
+    id: getNextId.value,
     username: username.value,
     password: password.value,
     firstName: firstName.value,
@@ -32,20 +34,10 @@ const handleSubmit = async () => {
     updatedDate: date
   };
 
-  const createOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(createUser)
-  };
-
-  try {
-    await fetch(`http://localhost:5000/users/`, createOptions);
-    store.fetchUsers();
-  } catch (err) {
-    console.log(err);
-  }
+  store.createUser(addUser);
+  setTimeout(() => {
+    router.push('/users');
+  }, 500);
 };
 
 const checkIsValidated = () => {
@@ -64,7 +56,7 @@ const checkIsValidated = () => {
 
 <template>
   <div class="wrapper">
-    <h2>Create New User</h2>
+    <h3>Create New User</h3>
 
     <form @submit.prevent="handleSubmit">
       <label htmlFor="username">Username: </label>
@@ -117,7 +109,7 @@ const checkIsValidated = () => {
 .wrapper {
   @apply w-6/12 m-auto;
 
-  h2 {
+  h3 {
     @apply mb-8 font-bold;
   }
 }

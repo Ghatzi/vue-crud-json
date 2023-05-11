@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { useUsers } from '../store/useUsers';
 
 onMounted(() => {
   getUserById();
 });
 
 const route = useRoute();
+const router = useRouter();
+const store = useUsers();
 const { id } = route.params;
 
-// const user: Ref<Users | null> = ref(null);
 const username = ref<string>('');
 const password = ref<string>('');
 const lastName = ref<string>('');
@@ -31,7 +33,7 @@ const getUserById = async () => {
   }
 };
 
-const handleSubmit = async () => {
+const handleSubmit = () => {
   const updateUser = {
     username: username.value,
     password: password.value,
@@ -40,19 +42,10 @@ const handleSubmit = async () => {
     updatedDate: new Date().toLocaleString()
   };
 
-  const updateOptions = {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(updateUser)
-  };
-
-  try {
-    await fetch(`http://localhost:5000/users/${id}`, updateOptions);
-  } catch (err) {
-    console.log(err);
-  }
+  store.updateUser(Number(id), updateUser);
+  setTimeout(() => {
+    router.push('/users');
+  }, 500);
 };
 
 const checkIsValidated = () => {
@@ -71,7 +64,7 @@ const checkIsValidated = () => {
 
 <template>
   <div class="wrapper">
-    <h2>Edit {{ originalUsername }}</h2>
+    <h3>Edit {{ originalUsername }}</h3>
 
     <form @submit.prevent="handleSubmit">
       <label htmlFor="username">Username: </label>
@@ -122,7 +115,7 @@ const checkIsValidated = () => {
 .wrapper {
   @apply w-6/12 m-auto;
 
-  h2 {
+  h3 {
     @apply mb-8 font-bold;
   }
 }

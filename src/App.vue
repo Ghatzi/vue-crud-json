@@ -1,13 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed, defineAsyncComponent } from 'vue';
+
+const BaseLayout = defineAsyncComponent(
+  () => import('./layout/BaseLayout.vue')
+);
+
+const layout = computed(() => {
+  return BaseLayout;
+});
+</script>
 
 <template>
-  <main>
-    <router-view></router-view>
-  </main>
+  <component :is="layout"></component>
 </template>
 
-<style scoped lang="postcss">
-main {
-  padding: 2rem;
-}
-</style>
+<style scoped lang="postcss"></style>

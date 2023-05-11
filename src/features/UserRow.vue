@@ -15,7 +15,11 @@ const router = useRouter();
 </script>
 
 <template>
-  <tr v-for="user in props.users" class="hover:bg-sky-300" :key="user.id">
+  <tr
+    v-for="user in props.users"
+    class="hover:bg-sky-100 hover:text-black"
+    :key="user.id"
+  >
     <td>{{ user.username }}</td>
     <td>{{ user.firstName }}</td>
     <td>{{ user.lastName }}</td>

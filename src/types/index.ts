@@ -1,10 +1,10 @@
 export interface Users {
-  id: number;
+  id?: number;
   username: string;
   password: string;
-  firstName: string;
+  firstName?: string;
   lastName: string;
   isAdmin: boolean;
-  createdDate: string;
+  createdDate?: string;
   updatedDate: string;
 }

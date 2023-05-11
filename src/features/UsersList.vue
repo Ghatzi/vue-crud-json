@@ -1,50 +1,42 @@
 <script setup lang="ts">
-import { onMounted, ref, Ref } from 'vue';
-import { Users } from '../types/index';
+import { onMounted, computed } from 'vue';
 import UserRow from './UserRow.vue';
 import { useRouter } from 'vue-router';
+import { useUsers } from '../store/useUsers';
 
 onMounted(() => {
-  getAllUsers();
+  store.fetchUsers();
 });
 
 const router = useRouter();
+const store = useUsers();
 
-const users: Ref<Array<Users>> = ref([]);
+const getAllUser = computed(() => {
+  return store.getAllUsers;
+});
 
-const getAllUsers = async () => {
-  try {
-    const response = await fetch('http://localhost:5000/users');
-    const data = await response.json();
-    users.value = data;
-  } catch (err) {
-    console.log(err);
-  }
-};
+const loadingData = computed(() => {
+  return store.isLoading;
+});
 
-const handleDelete = async (id: number) => {
-  try {
-    await fetch(`http://localhost:5000/users/${id}`, { method: 'DELETE' });
-    getAllUsers();
-  } catch (err) {
-    console.log(err);
-  }
+const handleDelete = (id: number) => {
+  store.deleteUser(id);
 };
 </script>
 
 <template>
-  <div class="flex justify-end mb-3">
+  <div class="flex justify-end mb-4">
     <button
-      title="Add User"
+      title="Create New User"
       class="btn btn-blue"
-      @click="() => router.push('users/add')"
+      @click="() => router.push('users/create')"
     >
-      Add User
+      Create New User
     </button>
   </div>
 
-  <table class="table-fixed border-x border-b w-full">
-    <thead class="font-bold bg-indigo-700 text-white">
+  <table class="table-fixed border-x border-y w-full">
+    <thead class="font-bold bg-indigo-700">
       <tr>
         <th>Username</th>
         <th>First Name</th>
@@ -57,7 +49,8 @@ const handleDelete = async (id: number) => {
       </tr>
     </thead>
     <tbody class="text-center">
-      <UserRow :users="users" @handle-delete="handleDelete"></UserRow>
+      <p>{{ loadingData ? 'loading users...' : '' }}</p>
+      <UserRow :users="getAllUser" @handle-delete="handleDelete"></UserRow>
     </tbody>
   </table>
 </template>

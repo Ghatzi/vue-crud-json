@@ -4,9 +4,44 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  @apply p-0 m-0 box-border bg-gray-900 text-white;
+}
+
+h1 {
+  @apply text-4xl;
+}
+
+h2 {
+  @apply text-3xl;
+}
+
+h3 {
+  @apply text-2xl;
+}
+
+h4 {
+  @apply text-xl;
+}
+
+h5 {
+  @apply text-lg;
+}
+
+h6 {
+  @apply text-sm;
+}
+
+header,
+footer {
+  @apply flex items-center px-5 min-h-[60px] bg-indigo-900;
+}
+
+header {
+  @apply justify-between;
+}
+
+footer {
+  @apply mt-auto justify-end;
 }
 
 .btn {
@@ -16,8 +51,8 @@ body {
 .btn-blue {
   @apply bg-blue-500;
 
-  .btn-blue:hover {
-    @apply bg-blue-700;
+  &:hover {
+    @apply bg-blue-900;
   }
 }
 
@@ -33,6 +68,6 @@ form {
   input[type='text'],
   input[type='password'],
   select {
-    @apply w-full my-2 box-border rounded border border-gray-300 inline-block py-3 px-4;
+    @apply w-full my-2 box-border rounded border border-gray-300 inline-block py-3 px-4 text-black;
   }
 }
