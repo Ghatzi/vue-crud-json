@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <header>Header</header>
+  <header>
+    <router-link to="/">Header</router-link>
+  </header>
 </template>
 
 <style scoped></style>

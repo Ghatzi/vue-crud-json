@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUsers } from '../store/useUsers';
+import { BASEURL } from '../config/baseUrl';
 
 onMounted(() => {
   getUserById();
@@ -21,7 +22,7 @@ const isDisabled = ref<boolean>(true);
 
 const getUserById = async () => {
   try {
-    const response = await fetch(`http://localhost:5000/users/${id}`);
+    const response = await fetch(`${BASEURL}/users/${id}`);
     const data = await response.json();
     username.value = data.username;
     password.value = data.password;

@@ -1,20 +1,32 @@
 import { defineStore } from 'pinia';
+import { BASEURL } from '../config/baseUrl';
 import { Users } from '../types/index';
 
 export const useUsers = defineStore('users', {
   state: () => ({
-    users: [],
-    id: 1,
+    users: [
+      {
+        id: 1,
+        username: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        isAdmin: false,
+        createdDate: '',
+        updatedDate: ''
+      }
+    ],
+    getNewId: 1,
     isLoading: false
   }),
   actions: {
     async fetchUsers() {
       this.isLoading = true;
       try {
-        const response = await fetch('http://localhost:5000/users');
+        const response = await fetch(`${BASEURL}/users`);
         const data = await response.json();
         this.users = await data;
-        this.id = data[data.length - 1].id + 1;
+        this.getNewId = data[data.length - 1].id + 1;
         this.isLoading = false;
       } catch (err) {
         console.log(err);
@@ -22,7 +34,7 @@ export const useUsers = defineStore('users', {
     },
     async deleteUser(id: number) {
       try {
-        await fetch(`http://localhost:5000/users/${id}`, { method: 'DELETE' });
+        await fetch(`${BASEURL}/users/${id}`, { method: 'DELETE' });
         this.fetchUsers();
       } catch (err) {
         console.log(err);
@@ -38,7 +50,7 @@ export const useUsers = defineStore('users', {
       };
 
       try {
-        await fetch(`http://localhost:5000/users/${id}`, updateOptions);
+        await fetch(`${BASEURL}/users/${id}`, updateOptions);
       } catch (err) {
         console.log(err);
       }
@@ -53,7 +65,7 @@ export const useUsers = defineStore('users', {
       };
 
       try {
-        await fetch(`http://localhost:5000/users/`, createOptions);
+        await fetch(`${BASEURL}/users/`, createOptions);
         this.fetchUsers();
       } catch (err) {
         console.log(err);
@@ -62,10 +74,10 @@ export const useUsers = defineStore('users', {
   },
   getters: {
     getAllUsers(state) {
-      return state.users;
+      return state.users.sort((a, b) => a.username.localeCompare(b.username));
     },
     getNextId(state) {
-      return state.id;
+      return state.getNewId;
     }
   }
 });

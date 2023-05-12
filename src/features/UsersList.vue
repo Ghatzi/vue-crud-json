@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import UserRow from './UserRow.vue';
 import { useRouter } from 'vue-router';
 import { useUsers } from '../store/useUsers';
@@ -11,8 +11,13 @@ onMounted(() => {
 const router = useRouter();
 const store = useUsers();
 
-const getAllUser = computed(() => {
-  return store.getAllUsers;
+const searchQuery = ref<string>('');
+
+const filteredUsers = computed(() => {
+  const searchValue = searchQuery.value.toLowerCase();
+  return store.getAllUsers?.filter(user =>
+    user.username.toLowerCase().includes(searchValue)
+  );
 });
 
 const loadingData = computed(() => {
@@ -25,7 +30,18 @@ const handleDelete = (id: number) => {
 </script>
 
 <template>
-  <div class="flex justify-end mb-4">
+  <div class="flex justify-between mb-4">
+    <form @submit.prevent>
+      <input
+        type="text"
+        id="search"
+        name="search"
+        placeholder="Search User..."
+        role="search"
+        v-model="searchQuery"
+      />
+    </form>
+
     <button
       title="Create New User"
       class="btn btn-blue"
@@ -49,8 +65,12 @@ const handleDelete = (id: number) => {
       </tr>
     </thead>
     <tbody class="text-center">
-      <p>{{ loadingData ? 'loading users...' : '' }}</p>
-      <UserRow :users="getAllUser" @handle-delete="handleDelete"></UserRow>
+      <p v-if="loadingData">loading users...</p>
+      <UserRow
+        v-else
+        :users="filteredUsers"
+        @handle-delete="handleDelete"
+      ></UserRow>
     </tbody>
   </table>
 </template>
@@ -59,6 +79,11 @@ const handleDelete = (id: number) => {
 table {
   th {
     @apply py-4;
+  }
+}
+form {
+  input[type='text'] {
+    @apply my-0 py-2;
   }
 }
 </style>

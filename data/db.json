@@ -8,7 +8,7 @@
       "lastName": "hatzi",
       "isAdmin": false,
       "createdDate": "10/05/2023, 23:04:52",
-      "updatedDate": "12/05/2023, 00:11:18"
+      "updatedDate": "12/05/2023, 00:27:03"
     },
     {
       "id": 2,
@@ -29,6 +29,36 @@
       "isAdmin": false,
       "createdDate": "10/05/2023, 23:04:52",
       "updatedDate": "11/05/2023, 13:25:38"
+    },
+    {
+      "id": 4,
+      "username": "payammagrabi",
+      "password": "12345",
+      "firstName": "payam",
+      "lastName": "magrabi",
+      "isAdmin": false,
+      "createdDate": "12/05/2023, 00:37:06",
+      "updatedDate": "12/05/2023, 00:37:06"
+    },
+    {
+      "id": 5,
+      "username": "despinahatzi",
+      "password": "12345",
+      "firstName": "despina",
+      "lastName": "hatzi",
+      "isAdmin": false,
+      "createdDate": "12/05/2023, 00:37:25",
+      "updatedDate": "12/05/2023, 00:37:25"
+    },
+    {
+      "id": 6,
+      "username": "jondoe",
+      "password": "12345",
+      "firstName": "jon",
+      "lastName": "doe",
+      "isAdmin": false,
+      "createdDate": "12/05/2023, 00:37:44",
+      "updatedDate": "12/05/2023, 00:37:44"
     }
   ]
 }
