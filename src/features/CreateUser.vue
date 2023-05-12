@@ -2,6 +2,8 @@
 import { ref, computed, onMounted } from 'vue';
 import { useUsers } from '../store/useUsers';
 import { useRouter } from 'vue-router';
+import BaseInput from '../components/base/BaseInput.vue';
+import BaseButton from '../components/base/BaseButton.vue';
 
 onMounted(() => {
   store.fetchUsers();
@@ -59,47 +61,44 @@ const checkIsValidated = () => {
     <h3>Create New User</h3>
 
     <form @submit.prevent="handleSubmit">
-      <label htmlFor="username">Username: </label>
-      <input
-        type="text"
+      <BaseInput
         id="username"
+        type="text"
+        name="username"
+        label="Username:"
         v-model="username"
         @input="checkIsValidated"
       />
 
-      <label htmlFor="password">Password: </label>
-      <input
-        type="password"
+      <BaseInput
         id="password"
+        type="password"
+        name="password"
+        label="Password:"
         v-model="password"
         @input="checkIsValidated"
       />
 
-      <label htmlFor="firstName">First Name: </label>
-      <input
-        type="text"
+      <BaseInput
         id="firstName"
+        type="text"
+        name="firstName"
+        label="First Name:"
         v-model="firstName"
         @input="checkIsValidated"
       />
 
-      <label htmlFor="lastName">Last Name: </label>
-      <input
-        type="text"
+      <BaseInput
         id="lastName"
+        type="text"
+        name="lastName"
+        label="Last Name:"
         v-model="lastName"
         @input="checkIsValidated"
       />
 
       <div class="flex justify-end mt-2">
-        <button
-          title="Create User"
-          class="btn"
-          :class="isDisabled ? 'btn-gray' : 'btn-blue'"
-          :disabled="isDisabled"
-        >
-          Create User
-        </button>
+        <BaseButton title="Create User" :isDisabled="isDisabled" />
       </div>
     </form>
   </div>

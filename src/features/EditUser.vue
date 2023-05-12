@@ -3,6 +3,9 @@ import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useUsers } from '../store/useUsers';
 import { BASEURL } from '../config/baseUrl';
+import BaseInput from '../components/base/BaseInput.vue';
+import BaseButton from '../components/base/BaseButton.vue';
+import BaseSelect from '../components/base/BaseSelect.vue';
 
 onMounted(() => {
   getUserById();
@@ -68,45 +71,42 @@ const checkIsValidated = () => {
     <h3>Edit {{ originalUsername }}</h3>
 
     <form @submit.prevent="handleSubmit">
-      <label htmlFor="username">Username: </label>
-      <input
-        type="text"
+      <BaseInput
         id="username"
+        type="text"
+        name="username"
+        label="Username:"
         v-model="username"
         @input="checkIsValidated"
       />
 
-      <label htmlFor="password">Password: </label>
-      <input
-        type="password"
+      <BaseInput
         id="password"
+        type="password"
+        name="password"
+        label="Password:"
         v-model="password"
         @input="checkIsValidated"
       />
 
-      <label htmlFor="lastName">Last Name: </label>
-      <input
-        type="text"
+      <BaseInput
         id="lastName"
+        type="text"
+        name="lastName"
+        label="Last Name:"
         v-model="lastName"
         @input="checkIsValidated"
       />
 
-      <label htmlFor="isAdmin">Admin: </label>
-      <select id="isAdmin" v-model="isAdmin" @change="checkIsValidated">
-        <option value="false">false</option>
-        <option value="true">true</option>
-      </select>
+      <BaseSelect
+        id="isAdmin"
+        label="Admin"
+        v-model="isAdmin"
+        @input="checkIsValidated"
+      ></BaseSelect>
 
       <div class="flex justify-end mt-2">
-        <button
-          title="Update User"
-          class="btn"
-          :class="isDisabled ? 'btn-gray' : 'btn-blue'"
-          :disabled="isDisabled"
-        >
-          Update User
-        </button>
+        <BaseButton title="Update User" :isDisabled="isDisabled" />
       </div>
     </form>
   </div>

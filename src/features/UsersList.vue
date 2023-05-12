@@ -3,6 +3,8 @@ import { onMounted, computed, ref } from 'vue';
 import UserRow from './UserRow.vue';
 import { useRouter } from 'vue-router';
 import { useUsers } from '../store/useUsers';
+import BaseInput from '../components/base/BaseInput.vue';
+import BaseButton from '../components/base/BaseButton.vue';
 
 onMounted(() => {
   store.fetchUsers();
@@ -32,23 +34,21 @@ const handleDelete = (id: number) => {
 <template>
   <div class="flex justify-between mb-4">
     <form @submit.prevent>
-      <input
-        type="text"
+      <BaseInput
         id="search"
+        type="text"
         name="search"
         placeholder="Search User..."
         role="search"
+        :hasMargins="false"
         v-model="searchQuery"
       />
     </form>
 
-    <button
+    <BaseButton
       title="Create New User"
-      class="btn btn-blue"
       @click="() => router.push('users/create')"
-    >
-      Create New User
-    </button>
+    />
   </div>
 
   <table class="table-fixed border-x border-y w-full">
@@ -79,11 +79,6 @@ const handleDelete = (id: number) => {
 table {
   th {
     @apply py-4;
-  }
-}
-form {
-  input[type='text'] {
-    @apply my-0 py-2;
   }
 }
 </style>
