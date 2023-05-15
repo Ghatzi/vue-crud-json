@@ -1,8 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TheNav from './TheNav.vue';
+</script>
 
 <template>
   <header>
-    <router-link to="/">Header</router-link>
+    <TheNav title="DataHouse" />
   </header>
 </template>
 

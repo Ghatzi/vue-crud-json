@@ -33,7 +33,7 @@ h6 {
 
 header,
 footer {
-  @apply flex items-center px-5 min-h-[60px] bg-indigo-900;
+  @apply flex items-center px-5 min-h-[60px] bg-indigo-900 w-full;
 }
 
 header {

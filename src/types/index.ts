@@ -14,3 +14,8 @@ export interface TableColumns {
   friendlyName: string;
   sortType: string;
 }
+
+export interface RoutesSection {
+  to: string;
+  text: string;
+}

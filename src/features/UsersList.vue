@@ -27,17 +27,15 @@ const arrowIconName = ref<string>('');
 
 const filteredUsers = computed(() => {
   const searchValue = searchQuery.value.toLowerCase();
-  return store.getAllUsers
-    .filter(
-      user =>
-        user.username.toLowerCase().includes(searchValue) ||
-        user.firstName.toLowerCase().includes(searchValue) ||
-        user.lastName.toLowerCase().includes(searchValue) ||
-        user.isAdmin.toString().includes(searchValue) ||
-        user.createdDate.toLowerCase().includes(searchValue) ||
-        user.updatedDate.toLowerCase().includes(searchValue)
-    )
-    .slice(0, 10);
+  return store.getAllUsers.filter(
+    user =>
+      user.username.toLowerCase().includes(searchValue) ||
+      user.firstName.toLowerCase().includes(searchValue) ||
+      user.lastName.toLowerCase().includes(searchValue) ||
+      user.isAdmin.toString().includes(searchValue) ||
+      user.createdDate.includes(searchValue) ||
+      user.updatedDate.includes(searchValue)
+  );
 });
 
 const sortByColumn = (column: string, columnType: string) => {
@@ -74,9 +72,7 @@ const handleDelete = (id: number) => {
   store.deleteUser(id);
 };
 
-const pushRoute = (url: string) => {
-  router.push(url);
-};
+const goToRoute = (url: string) => router.push(url);
 </script>
 
 <template>
@@ -93,7 +89,7 @@ const pushRoute = (url: string) => {
       />
     </form>
 
-    <BaseButton title="Create New User" @click="pushRoute('users/create')" />
+    <BaseButton title="Create New User" @click="goToRoute('users/create')" />
   </div>
 
   <table class="table-fixed border-x border-y w-full">

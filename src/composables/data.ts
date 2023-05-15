@@ -1,4 +1,4 @@
-import { TableColumns } from '../types/index';
+import { RoutesSection, TableColumns } from '../types/index';
 
 export const columns: TableColumns[] = [
   {
@@ -31,4 +31,9 @@ export const columns: TableColumns[] = [
     friendlyName: 'updated date',
     sortType: 'date'
   }
+];
+
+export const routes: Array<RoutesSection> = [
+  { to: '/', text: 'Home' },
+  { to: '/users', text: 'Users' }
 ];

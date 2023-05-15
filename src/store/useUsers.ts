@@ -65,7 +65,7 @@ export const useUsers = defineStore('users', {
       };
 
       try {
-        await fetch(`${BASEURL}/users/`, createOptions);
+        await fetch(`${BASEURL}/users`, createOptions);
         this.fetchUsers();
       } catch (err) {
         console.log(err);
