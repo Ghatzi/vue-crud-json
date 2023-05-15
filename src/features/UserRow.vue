@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { faPenToSquare, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faTimes, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'vue-router';
 
 const props = defineProps({
@@ -24,8 +24,8 @@ const router = useRouter();
     <td>{{ user.firstName }}</td>
     <td>{{ user.lastName }}</td>
     <td>{{ user.isAdmin ? 'true' : 'false' }}</td>
-    <td>{{ user.createdDate }}</td>
-    <td>{{ user.updatedDate }}</td>
+    <td>{{ new Date(user.createdDate).toLocaleString() }}</td>
+    <td>{{ new Date(user.updatedDate).toLocaleString() }}</td>
     <td class="cursor-pointer" @click="router.push(`/users/${user.id}`)">
       <font-awesome-icon :icon="faPenToSquare" />
     </td>
@@ -38,7 +38,7 @@ const router = useRouter();
 <style lang="postcss" scoped>
 table {
   td {
-    @apply py-4;
+    @apply p-3 text-center;
   }
 
   td:not(:first-child) {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useUsers } from '../store/useUsers';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import BaseInput from '../components/base/BaseInput.vue';
 import BaseButton from '../components/base/BaseButton.vue';
+import BaseInput from '../components/base/BaseInput.vue';
+import { useUsers } from '../store/useUsers';
 
 onMounted(() => {
   store.fetchUsers();
@@ -23,17 +23,15 @@ const getNextId = computed(() => {
 });
 
 const handleSubmit = () => {
-  const date = new Date().toLocaleString();
-
   const addUser = {
     id: getNextId.value,
     username: username.value,
     password: password.value,
-    firstName: firstName.value,
-    lastName: lastName.value,
+    firstName: firstName.value.toLowerCase(),
+    lastName: lastName.value.toLowerCase(),
     isAdmin: false,
-    createdDate: date,
-    updatedDate: date
+    createdDate: new Date(),
+    updatedDate: new Date()
   };
 
   store.createUser(addUser);

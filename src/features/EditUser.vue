@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useUsers } from '../store/useUsers';
-import { BASEURL } from '../config/baseUrl';
-import BaseInput from '../components/base/BaseInput.vue';
 import BaseButton from '../components/base/BaseButton.vue';
+import BaseInput from '../components/base/BaseInput.vue';
 import BaseSelect from '../components/base/BaseSelect.vue';
+import { BASEURL } from '../config/baseUrl';
+import { useUsers } from '../store/useUsers';
 
 onMounted(() => {
   getUserById();
@@ -41,9 +41,9 @@ const handleSubmit = () => {
   const updateUser = {
     username: username.value,
     password: password.value,
-    lastName: lastName.value,
+    lastName: lastName.value.toLowerCase(),
     isAdmin: isAdmin.value === 'true' ? true : false,
-    updatedDate: new Date().toLocaleString()
+    updatedDate: new Date()
   };
 
   store.updateUser(Number(id), updateUser);

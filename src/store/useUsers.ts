@@ -74,7 +74,7 @@ export const useUsers = defineStore('users', {
   },
   getters: {
     getAllUsers(state) {
-      return state.users.sort((a, b) => a.username.localeCompare(b.username));
+      return state.users;
     },
     getNextId(state) {
       return state.getNewId;

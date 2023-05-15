@@ -5,6 +5,12 @@ export interface Users {
   firstName?: string;
   lastName: string;
   isAdmin: boolean;
-  createdDate?: string;
-  updatedDate: string;
+  createdDate?: Date;
+  updatedDate: Date;
+}
+
+export interface TableColumns {
+  id: string;
+  friendlyName: string;
+  sortType: string;
 }
