@@ -7,6 +7,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { users } from '../../data/db.json';
+import Pagination from '../components/Pagination.vue';
 import BaseButton from '../components/base/BaseButton.vue';
 import BaseInput from '../components/base/BaseInput.vue';
 import { columns } from '../composables/data';
@@ -21,21 +23,36 @@ const router = useRouter();
 const store = useUsers();
 
 const searchQuery = ref<string>('');
+const getUsers = ref(users);
+
+// pagination
+const currentPage = ref(1);
+const recordsPerPage = ref(10);
+const indexOfLastRecord = ref(currentPage.value * recordsPerPage.value);
+const indexOfFirstRecord = ref(indexOfLastRecord.value - recordsPerPage.value);
+const numberOfPages = ref(
+  Math.ceil(getUsers.value.length / recordsPerPage.value)
+);
+const pageNumbers = [...Array(numberOfPages.value + 1).keys()].slice(1);
+
+// sorting
 const sortColumn = ref<string>('');
 const sortDirection = ref<number>(1);
 const arrowIconName = ref<string>('');
 
 const filteredUsers = computed(() => {
   const searchValue = searchQuery.value.toLowerCase();
-  return store.getAllUsers.filter(
-    user =>
-      user.username.toLowerCase().includes(searchValue) ||
-      user.firstName.toLowerCase().includes(searchValue) ||
-      user.lastName.toLowerCase().includes(searchValue) ||
-      user.isAdmin.toString().includes(searchValue) ||
-      user.createdDate.includes(searchValue) ||
-      user.updatedDate.includes(searchValue)
-  );
+  return getUsers.value
+    .slice(indexOfFirstRecord.value, indexOfLastRecord.value)
+    .filter(
+      user =>
+        user.username.toLowerCase().includes(searchValue) ||
+        user.firstName.toLowerCase().includes(searchValue) ||
+        user.lastName.toLowerCase().includes(searchValue) ||
+        user.isAdmin.toString().includes(searchValue) ||
+        user.createdDate.includes(searchValue) ||
+        user.updatedDate.includes(searchValue)
+    );
 });
 
 const sortByColumn = (column: string, columnType: string) => {
@@ -45,7 +62,7 @@ const sortByColumn = (column: string, columnType: string) => {
   if (sortDirection.value === 1) {
     arrowIconName.value = 'faSortUp';
 
-    store.getAllUsers.sort((a: any, b: any) => {
+    getUsers.value.sort((a: any, b: any) => {
       if (columnType === 'date') {
         return new Date(a[column]) > new Date(b[column]) ? 1 : -1;
       } else {
@@ -54,7 +71,7 @@ const sortByColumn = (column: string, columnType: string) => {
     });
   } else {
     arrowIconName.value = 'faSortDown';
-    store.getAllUsers.sort((a: any, b: any) => {
+    getUsers.value.sort((a: any, b: any) => {
       if (columnType === 'date') {
         return new Date(a[column]) < new Date(b[column]) ? 1 : -1;
       } else {
@@ -73,6 +90,28 @@ const handleDelete = (id: number) => {
 };
 
 const goToRoute = (url: string) => router.push(url);
+
+const updatePage = (page: number) => {
+  currentPage.value = page;
+  indexOfLastRecord.value = page * recordsPerPage.value;
+  indexOfFirstRecord.value = indexOfLastRecord.value - recordsPerPage.value;
+};
+
+const prevPage = () => {
+  if (currentPage.value !== 1) {
+    currentPage.value = currentPage.value - 1;
+    indexOfLastRecord.value = currentPage.value * recordsPerPage.value;
+    indexOfFirstRecord.value = indexOfLastRecord.value - recordsPerPage.value;
+  }
+};
+
+const nextPage = () => {
+  if (currentPage.value !== numberOfPages.value) {
+    currentPage.value = currentPage.value + 1;
+    indexOfLastRecord.value = currentPage.value * recordsPerPage.value;
+    indexOfFirstRecord.value = indexOfLastRecord.value - recordsPerPage.value;
+  }
+};
 </script>
 
 <template>
@@ -125,6 +164,14 @@ const goToRoute = (url: string) => router.push(url);
     </tbody>
     <p class="p-2" v-if="filteredUsers.length === 0">no records found</p>
   </table>
+
+  <Pagination
+    :pageNumbers="pageNumbers"
+    @prev-page="prevPage"
+    @next-page="nextPage"
+    @update-page="updatePage"
+    :currentPage="currentPage"
+  />
 </template>
 
 <style scoped lang="postcss">

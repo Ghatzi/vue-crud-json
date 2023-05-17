@@ -16,19 +16,9 @@
       "password": "12345",
       "firstName": "bobbie",
       "lastName": "lava",
-      "isAdmin": true,
-      "createdDate": "2023-05-13T18:07:10.103Z",
-      "updatedDate": "2023-05-13T16:07:05.103Z"
-    },
-    {
-      "id": 3,
-      "username": "ikaroshatzi",
-      "password": "12345",
-      "firstName": "ikaros",
-      "lastName": "hatzi",
       "isAdmin": false,
-      "createdDate": "2023-05-13T18:07:05.103Z",
-      "updatedDate": "2023-05-16T16:07:05.103Z"
+      "createdDate": "2023-05-13T18:07:10.103Z",
+      "updatedDate": "2023-05-16T15:43:15.619Z"
     },
     {
       "id": 4,
@@ -171,16 +161,6 @@
       "updatedDate": "2023-05-14T23:55:28.717Z"
     },
     {
-      "id": 18,
-      "username": "yadirahayes",
-      "password": "12345",
-      "firstName": "yadira",
-      "lastName": "hayes",
-      "isAdmin": false,
-      "createdDate": "2023-05-14T23:55:52.497Z",
-      "updatedDate": "2023-05-14T23:55:52.497Z"
-    },
-    {
       "id": 19,
       "username": "parkerandersen",
       "password": "12345",
@@ -199,6 +179,16 @@
       "isAdmin": false,
       "createdDate": "2023-05-14T23:57:48.831Z",
       "updatedDate": "2023-05-14T23:57:48.831Z"
+    },
+    {
+      "id": 21,
+      "username": "mhbhk",
+      "password": "jkbkj",
+      "firstName": "mnn",
+      "lastName": "nmb",
+      "isAdmin": false,
+      "createdDate": "2023-05-16T16:40:07.586Z",
+      "updatedDate": "2023-05-16T16:40:07.586Z"
     }
   ]
 }
